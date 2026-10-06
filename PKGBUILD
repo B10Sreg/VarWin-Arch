@@ -1,7 +1,7 @@
 # Maintainer: B10Sreg <iam171181@gmail.com>
 pkgname=varwin-bin
 pkgver=18.5.512
-pkgrel=1
+pkgrel=2
 pkgdesc="Varwin XRMS - 3D/VR Platform and Creation Suite for Linux"
 arch=('x86_64')
 url="https://varwin.com"
@@ -28,7 +28,8 @@ optdepends=(
 provides=('varwin' 'varwin-18')
 conflicts=('varwin' 'varwin-18')
 install=varwin.install
-options=('!strip' '!debug')
+# ВАЖНО: 'staticlibs' обязателен для работы .NET Core зависимостей
+options=('!strip' '!debug' 'staticlibs')
 
 source=(
     "Varwin_${pkgver}.deb::https://dist.varwin.com/debian/stable/18/pool/non-free/v/varwin-18/Varwin%20${pkgver}.deb"
@@ -71,7 +72,9 @@ package() {
     cp -a "${srcdir}"/ssl/usr/lib/x86_64-linux-gnu/libssl* "${pkgdir}/opt/Varwin18/lib/"
     cp -a "${srcdir}"/ssl/usr/lib/x86_64-linux-gnu/libcrypto* "${pkgdir}/opt/Varwin18/lib/"
 
-    # 4. Copy compatibility libraries to .NET Core services
+    # 4. Copy compatibility libraries to .NET Core and backend services
+    cp -a "${pkgdir}"/opt/Varwin18/lib/* "${pkgdir}/opt/Varwin18/services/" 2>/dev/null || true
+    cp -a "${pkgdir}"/opt/Varwin18/lib/* "${pkgdir}/opt/Varwin18/services/client/VarwinMigratorService/" 2>/dev/null || true
     cp -a "${pkgdir}"/opt/Varwin18/lib/* "${pkgdir}/opt/Varwin18/services/client/UrlSchemaLauncher/" 2>/dev/null || true
     cp -a "${pkgdir}"/opt/Varwin18/lib/* "${pkgdir}/opt/Varwin18/services/converter/" 2>/dev/null || true
 

@@ -1,7 +1,7 @@
 pkgbase = varwin-bin
 	pkgdesc = Varwin XRMS - 3D/VR Platform and Creation Suite for Linux
 	pkgver = 18.5.512
-	pkgrel = 1
+	pkgrel = 2
 	url = https://varwin.com
 	install = varwin.install
 	arch = x86_64
@@ -27,6 +27,7 @@ pkgbase = varwin-bin
 	conflicts = varwin-18
 	options = !strip
 	options = !debug
+	options = staticlibs
 	source = Varwin_18.5.512.deb::https://dist.varwin.com/debian/stable/18/pool/non-free/v/varwin-18/Varwin%2018.5.512.deb
 	source = libicu63_63.1-6+deb10u3_amd64.deb::https://dist.varwin.com/debian/stable/18/pool/non-free/i/icu/libicu63_63.1-6+deb10u3_amd64.deb
 	source = libssl1.1_1.1.1f-1ubuntu2.24_amd64.deb::http://archive.ubuntu.com/ubuntu/pool/main/o/openssl/libssl1.1_1.1.1f-1ubuntu2.24_amd64.deb
